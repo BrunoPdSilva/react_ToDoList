@@ -13,18 +13,20 @@ export function Home() {
 
   const handleAddTodo = e => {
     e.preventDefault();
-    form.reset();
-
-    const newToDo = {
-      task: toDo,
-      time: new Date().toLocaleTimeString("pt-BR", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }),
-      id: toDoList.length + 1,
-    };
-    setToDoList(prevState => [...prevState, newToDo]);
+    if(form.addInput.value.length > 3) {
+      form.reset();
+  
+      const newToDo = {
+        task: toDo,
+        time: new Date().toLocaleTimeString("pt-BR", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        }),
+        id: toDoList.length + 1,
+      };
+      setToDoList(prevState => [...prevState, newToDo]);
+    }
   };
 
   return (
@@ -54,7 +56,7 @@ export function Home() {
           ))}
         {showToDos && (
           <form className="addTodo">
-            <input type="text" onChange={e => setToDo(e.target.value)} />
+            <input type="text" onChange={e => setToDo(e.target.value)} id="addInput" />
             <button type="submit" onClick={e => handleAddTodo(e)}>
               Adicionar
             </button>
