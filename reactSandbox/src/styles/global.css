@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 62.5%;
+  -webkit-font-smoothing: subpixel-antialiased;
+
+  background-color: #14213D
+}
+
+section {
+  margin-inline: 10rem;
+}

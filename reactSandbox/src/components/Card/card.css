@@ -1,0 +1,38 @@
+div.card {
+  position: relative;
+  margin: 0.7rem 1.6rem;
+  padding-inline: 1rem;
+  height: 3rem;
+  width: 55%;
+
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #FFF;
+
+  border-radius: 1rem;
+  background-color: #735bf2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+div.card button {
+  border: none;
+  background-color: #735bf2;
+  cursor: pointer;
+
+  transition: 0.5s ease-in-out
+}
+
+div.card button:hover {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+div.card small {
+  position: absolute;
+  right: 10%;
+  font-size: 0.8rem;
+}
+
