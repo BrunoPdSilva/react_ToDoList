@@ -1,0 +1,22 @@
+.modal-container {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.modal-backdrop {
+  display: flex;
+  justify-content: center;
+}
+
+.modal {
+  padding: 0.5rem;
+}
+
+.modal h2 {
+  margin-bottom: 0.2rem;
+
+  font-size: 1.2rem;
+  color: rgb(248, 75, 75);
+}
