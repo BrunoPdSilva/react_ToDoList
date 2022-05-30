@@ -6,11 +6,14 @@ import "./home.css";
 export function Home() {
   const [showModal, setShowModal] = useState();
   const [showToDos, setShowToDos] = useState(true);
-  const [toDo, setToDo] = useState();
   const [toDoList, setToDoList] = useState([]);
+  const [toDo, setToDo] = useState();
+
   const form = document.querySelector(".addTodo");
 
   const handleCloseModal = () => setShowModal(false);
+
+  if (showModal == true) setTimeout(handleCloseModal, 5000)
 
   const handleDelete = id =>
     setToDoList(prevState => prevState.filter(toDo => toDo.id != id));
@@ -23,16 +26,11 @@ export function Home() {
       const newToDo = {
         task: toDo,
         time: new Date().toLocaleTimeString("pt-BR", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        }),
+          hour: "2-digit", minute: "2-digit", second: "2-digit"}),
         id: toDoList.length + 1,
       };
       setToDoList(prevState => [...prevState, newToDo]);
-    } else {
-      setShowModal(true);
-    }
+    } else setShowModal(true);
   };
 
   return (
@@ -52,32 +50,24 @@ export function Home() {
         )}
         {showToDos &&
           toDoList.map(toDo => (
-            <Card
-              key={toDo.id}
-              task={toDo.task}
-              time={toDo.time}
-              id={toDo.id}
-              deleteFunc={handleDelete}
-            />
+            <Card key={toDo.id} task={toDo.task} time={toDo.time} id={toDo.id} deleteFunc={handleDelete} />
           ))}
         {showToDos && (
           <form className="addTodo">
-            <input
-              type="text"
-              onChange={e => setToDo(e.target.value)}
-              id="addInput"
+            <input 
+              autoComplete="off" type="text" onChange={e => setToDo(e.target.value)} id="addInput" placeholder="Insira uma tarefa..."
             />
-            <button type="submit" onClick={e => handleAddTodo(e)}>
-              Adicionar
-            </button>
+            <button type="submit" onClick={e => handleAddTodo(e)}>Adicionar</button>
           </form>
         )}
       </div>
+
       {showModal && (
         <Modal closeModal={handleCloseModal}>
           <h2>Sua tarefa deve conter pelo menos 3 letras =&#41;</h2>
         </Modal>
       )}
+
     </section>
   );
 }
