@@ -39,6 +39,12 @@ div .navbar {
   font-size: 1.2rem;
   text-decoration: none;
   color: #fff;
+
+  transition: ease 0.4s;
+}
+
+.navbar a:hover {
+  filter: brightness(0.8)
 }
 
 .navbar button {
