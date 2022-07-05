@@ -1,3 +1,5 @@
+import { Trash } from "phosphor-react"
+
 import './card.css'
 
 export function Card({id, task, time, deleteFunc}){
@@ -6,7 +8,7 @@ export function Card({id, task, time, deleteFunc}){
     <div className="card">
       <p>{id} - {task}</p>
       <small>Criado em {time}</small>
-      <button onClick={() => deleteFunc(id)}><i className="fa-solid fa-trash-can"></i></button>
+      <button onClick={() => deleteFunc(id)}><Trash size={22} /></button>
     </div>
   )
 }
