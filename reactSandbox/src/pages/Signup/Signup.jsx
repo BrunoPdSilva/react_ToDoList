@@ -8,28 +8,45 @@ export function Signup() {
   const [password, setPassword] = useState("");
   const { error, isPending, signup } = useSignup();
 
-  const handleSubmit = (e) => {
+  const handleSignup = e => {
     e.preventDefault();
 
-    signup(email, password, name)
-  }
+    signup(email, password, name);
+
+    setName("");
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <form className="signup-form" onSubmit={handleSignup}>
       <h2 className="form-title">Cadastre-se:</h2>
       <label>
         <p>nome:</p>
-        <input type="text" onChange={e => setName(e.target.value)} />
+        <input
+          type="text"
+          onChange={e => setName(e.target.value)}
+          value={name}
+        />
       </label>
       <label>
         <p>email:</p>
-        <input type="email" onChange={e => setEmail(e.target.value)} />
+        <input
+          type="email"
+          onChange={e => setEmail(e.target.value)}
+          value={email}
+        />
       </label>
       <label>
         <p>senha:</p>
-        <input type="password" onChange={e => setPassword(e.target.value)} />
+        <input
+          type="password"
+          onChange={e => setPassword(e.target.value)}
+          value={password}
+        />
       </label>
-      <button>Cadastrar</button>
+      {isPending && <button>Carregando...</button>}
+      {!isPending && <button>Cadastrar</button>}
     </form>
   );
 }
