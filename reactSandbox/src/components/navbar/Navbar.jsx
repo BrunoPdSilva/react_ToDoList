@@ -1,10 +1,11 @@
 import { AddressBook } from "phosphor-react";
 import { Link } from "react-router-dom";
+import { useLogout } from "../../hooks/useLogout";
 import "./Navbar.css";
 
-const handleLogout = () => {};
-
 export function Navbar() {
+  const { logout } = useLogout();
+  
   return (
     <div className="navbar">
       <div className="name-icon">
@@ -20,7 +21,7 @@ export function Navbar() {
           <Link to="/signup">Signup</Link>
         </li>
         <li>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={logout}>Logout</button>
         </li>
       </ul>
     </div>
