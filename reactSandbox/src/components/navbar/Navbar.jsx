@@ -1,16 +1,19 @@
 import { AddressBook } from "phosphor-react";
 import { Link } from "react-router-dom";
 import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
+
 import "./Navbar.css";
 
 export function Navbar() {
+  const { user } = useAuthContext();
   const { logout } = useLogout();
   
   return (
     <div className="navbar">
       <div className="name-icon">
         <AddressBook size={36} color="#fff" />
-        <span>Bruno Peres</span>
+        {user && <span>{user.displayName}</span>}
       </div>
 
       <ul>
