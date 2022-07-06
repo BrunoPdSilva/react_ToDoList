@@ -1,5 +1,7 @@
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useState } from "react";
+import { dataBase } from "../../firebase/config";
+import { collection, addDoc } from "firebase/firestore";
 
 import { Card } from "../../components/Card/Card";
 import { Modal } from "../../components/Modal/Modal";
@@ -8,7 +10,6 @@ import "./home.css";
 
 export function Home() {
   const [showModal, setShowModal] = useState();
-  const [showToDos, setShowToDos] = useState(true);
   const [toDoList, setToDoList] = useState([]);
   const [toDo, setToDo] = useState("");
 
@@ -21,9 +22,9 @@ export function Home() {
     /* setToDoList(prevState => prevState.filter(toDo => toDo.id != id)); */
   };
 
-  const handleAddTodo = e => {
+  const handleAddTodo = async e => {
     e.preventDefault();
-    if (toDo.length > 3) {
+    if (toDo.length >= 3) {
       const newToDo = {
         task: toDo,
         time: new Date().toLocaleTimeString("pt-BR", {
@@ -32,7 +33,11 @@ export function Home() {
           second: "2-digit",
         }),
         id: toDoList.length + 1,
+        userId: user.uid
       };
+
+      await addDoc(collection(dataBase, "todo_list"), newToDo);
+
       setToDoList(prevState => [...prevState, newToDo]);
       setToDo("");
     } else {
@@ -44,32 +49,19 @@ export function Home() {
     <section>
       <h1>React ToDo List =&#41;</h1>
       <div className="toDos">
-        {!showToDos && (
-          <button className="showButtons" onClick={() => setShowToDos(true)}>
-            Mostrar
-          </button>
-        )}
-        {showToDos && (
-          <button className="showButtons" onClick={() => setShowToDos(false)}>
-            Ocultar
-          </button>
-        )}
-        {showToDos &&
-          toDoList.map(toDo => (
-            <Card key={toDo.id} toDo={toDo} deleteFunc={handleDelete} />
-          ))}
-        {showToDos && (
-          <form className="addTodo" onSubmit={e => handleAddTodo(e)}>
-            <input
-              type="text"
-              onChange={e => setToDo(e.target.value)}
-              value={toDo}
-              autoComplete="off"
-              placeholder="Insira uma tarefa..."
-            />
-            <button type="submit">Adicionar</button>
-          </form>
-        )}
+        {toDoList.map(toDo => (
+          <Card key={toDo.id} toDo={toDo} deleteFunc={handleDelete} />
+        ))}
+        <form className="addTodo" onSubmit={e => handleAddTodo(e)}>
+          <input
+            type="text"
+            onChange={e => setToDo(e.target.value)}
+            value={toDo}
+            autoComplete="off"
+            placeholder="Insira uma tarefa..."
+          />
+          <button type="submit">Adicionar</button>
+        </form>
       </div>
 
       {showModal && (
