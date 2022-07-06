@@ -8,7 +8,7 @@ import "./Navbar.css";
 export function Navbar() {
   const { user } = useAuthContext();
   const { logout } = useLogout();
-  
+
   return (
     <div className="navbar">
       <div className="name-icon">
@@ -17,15 +17,21 @@ export function Navbar() {
       </div>
 
       <ul>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/signup">Signup</Link>
-        </li>
-        <li>
-          <button onClick={logout}>Logout</button>
-        </li>
+        {!user && (
+          <>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Signup</Link>
+            </li>
+          </>
+        )}
+        {user && (
+          <li>
+            <button onClick={logout}>Logout</button>
+          </li>
+        )}
       </ul>
     </div>
   );

@@ -1,8 +1,6 @@
-import ReactDOM from "react-dom";
-
 import "./modal.css";
 
-export function Modal({ children, closeModal }) {
+export function Modal({ children }) {
   return (
     <div className="modal-container">
       <div className="modal-backdrop">

@@ -7,27 +7,29 @@ import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/Signup/Signup";
 
 export default function App() {
-  const { user } = useAuthContext();
+  const { user, authIsReady } = useAuthContext();
 
   return (
     <div>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route
-            path="/"
-            element={user ? <Home /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/login"
-            element={!user ? <Login /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/signup"
-            element={!user ? <Signup /> : <Navigate to="/" />}
-          />
-        </Routes>
-      </BrowserRouter>
+      {authIsReady && (
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route
+              path="/"
+              element={user ? <Home /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/login"
+              element={!user ? <Login /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/signup"
+              element={!user ? <Signup /> : <Navigate to="/" />}
+            />
+          </Routes>
+        </BrowserRouter>
+      )}
     </div>
   );
 }
