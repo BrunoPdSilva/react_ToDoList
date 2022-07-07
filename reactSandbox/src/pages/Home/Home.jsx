@@ -1,11 +1,17 @@
-import { useAuthContext } from "../../hooks/useAuthContext";
+//REACT
 import { useState } from "react";
-import { dataBase } from "../../firebase/config";
-import { collection, addDoc } from "firebase/firestore";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useCollection } from "../../hooks/useCollection";
 
+//COMPONENTS
 import { Card } from "../../components/Card/Card";
 import { Modal } from "../../components/Modal/Modal";
 
+//FIREBASE
+import { dataBase } from "../../firebase/config";
+import { collection, addDoc } from "firebase/firestore";
+
+//STYLES
 import "./home.css";
 
 export function Home() {
@@ -14,6 +20,7 @@ export function Home() {
   const [toDo, setToDo] = useState("");
 
   const { user } = useAuthContext();
+  const { documents } = useCollection("todo_list")
 
   const handleCloseModal = () => setShowModal(false);
   if (showModal) setTimeout(handleCloseModal, 3000);
@@ -32,8 +39,8 @@ export function Home() {
           minute: "2-digit",
           second: "2-digit",
         }),
-        id: toDoList.length + 1,
-        userId: user.uid
+        id: Math.random(),
+        userId: user.uid,
       };
 
       await addDoc(collection(dataBase, "todo_list"), newToDo);
