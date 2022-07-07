@@ -1,5 +1,5 @@
 import { useReducer, useEffect, useState } from "react";
-import { dataBase, timestamp } from "../firebase/config";
+import { dataBase } from "../firebase/config";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 
 let initialState = {
@@ -60,7 +60,10 @@ export const useFirestore = col => {
     dispatch({ type: "IS_PENDING" });
 
     try {
-      await deleteDoc(dataBase, "todo_list", id)
-    } catch (err) {}
+      await deleteDoc(dataBase, "todo_list", id);
+    } catch (err) {
+      console.log(err);
+    }
   };
+  return { deleteDocument };
 };

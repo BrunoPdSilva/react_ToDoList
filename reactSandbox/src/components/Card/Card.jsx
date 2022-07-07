@@ -1,13 +1,29 @@
-import { Trash } from "phosphor-react"
-import './card.css'
+import { dataBase } from "../../firebase/config";
+import { deleteDoc, doc } from "firebase/firestore";
 
-export function Card({toDo, deleteFunc}){
-  
+import { Trash } from "phosphor-react";
+import "./card.css";
+
+export function Card({ toDos }) {
+
+  const handleClick = async id => {
+    const docRef = doc(dataBase, "todo_list", id);
+    await deleteDoc(docRef)
+    
+  }
+
   return (
-    <div className="card">
-      <p>{toDo.task}</p>
-      <small>Criado em {toDo.time}</small>
-      <button onClick={() => deleteFunc()}><Trash size={22} /></button>
-    </div>
-  )
+    <>
+      {toDos &&
+        toDos.map(({ task, time, id }) => (
+          <div className="card" key={id}>
+            <p>{task}</p>
+            <small>Criado em {time}</small>
+            <button onClick={() => handleClick(id)}>
+              <Trash size={22} />
+            </button>
+          </div>
+        ))}
+    </>
+  );
 }

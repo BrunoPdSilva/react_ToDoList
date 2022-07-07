@@ -15,55 +15,44 @@ import { collection, addDoc } from "firebase/firestore";
 import "./home.css";
 
 export function Home() {
-  const [showModal, setShowModal] = useState();
-  const [toDoList, setToDoList] = useState([]);
-  const [toDo, setToDo] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [newTodo, setNewTodo] = useState("");
 
   const { user } = useAuthContext();
-  const { documents } = useCollection("todo_list")
-
-  const handleCloseModal = () => setShowModal(false);
-  if (showModal) setTimeout(handleCloseModal, 3000);
-
-  const handleDelete = id => {
-    /* setToDoList(prevState => prevState.filter(toDo => toDo.id != id)); */
-  };
+  const { documents } = useCollection("todo_list", ["userId", "==", user.uid]);
 
   const handleAddTodo = async e => {
     e.preventDefault();
-    if (toDo.length >= 3) {
-      const newToDo = {
-        task: toDo,
-        time: new Date().toLocaleTimeString("pt-BR", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        }),
-        id: Math.random(),
-        userId: user.uid,
-      };
 
-      await addDoc(collection(dataBase, "todo_list"), newToDo);
+    const toAdd = {
+      task: newTodo,
+      time: new Date().toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }),
+      id: Math.random(),
+      userId: user.uid,
+    };
 
-      setToDoList(prevState => [...prevState, newToDo]);
-      setToDo("");
-    } else {
-      setShowModal(true);
-    }
+    await addDoc(collection(dataBase, "todo_list"), toAdd);
+
+    setNewTodo("");
   };
+
+  const handleCloseModal = () => setShowModal(false);
+  if (showModal) setTimeout(handleCloseModal, 3000);
 
   return (
     <section>
       <h1>React ToDo List =&#41;</h1>
       <div className="toDos">
-        {toDoList.map(toDo => (
-          <Card key={toDo.id} toDo={toDo} deleteFunc={handleDelete} />
-        ))}
+        <Card toDos={documents} />
         <form className="addTodo" onSubmit={e => handleAddTodo(e)}>
           <input
             type="text"
-            onChange={e => setToDo(e.target.value)}
-            value={toDo}
+            onChange={e => setNewTodo(e.target.value)}
+            value={newTodo}
             autoComplete="off"
             placeholder="Insira uma tarefa..."
           />
