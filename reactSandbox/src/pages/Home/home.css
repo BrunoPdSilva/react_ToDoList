@@ -1,49 +1,51 @@
-section {
-  margin: 2.8rem 0;
+main {
+  margin: 1.6rem 2.8rem;
 }
 
-section h1 {
+main h1 {
+  margin-bottom: 1rem;
   text-align: center;
   font-size: 2.5rem;
   color: #ffffff;
 }
 
-section h2 {
+main h2 {
   margin-bottom: 2.8rem;
 
   font-size: 1.5rem;
   color: #e5e5e5;
 }
 
-section .showButtons {
-  margin-bottom: 2.8rem;
-  padding: 0.6rem 1rem;
-  width: 7rem;
-
-  font-size: 1rem;
-  font-weight: 600;
-  color: #14213d;
-
-  background-color: #fca311;
-  border: none;
-  border-radius: 1rem;
-
-  transition: filter 0.2s ease-in-out;
-}
-
-section .showButtons:hover {
-  cursor: pointer;
-  filter: brightness(0.9);
-}
-
 div.toDos {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-form.addTodo{
-  width: 55%;
+form.addTodo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+form.addTodo input {
+  margin-top: 0.4rem;
+  padding: 0.6rem 1rem;
+  border-radius: 1rem;
+  border: none;
+}
+
+form.addTodo label {
+  width: 100%;
+}
+form.addTodo task-input {
+  width: 400px;
+}
+
+form.addTodo date-input {
+  width: 400px;
 }
 
 form.addTodo button {
@@ -64,13 +66,4 @@ form.addTodo button {
 form.addTodo button:hover{
   cursor: pointer;
   filter: brightness(0.9);
-}
-
-form.addTodo input {
-  width: 81%;
-  margin-top: 0.4rem;
-  margin-right: 0.5rem;
-  padding: 0.6rem 1rem;
-  border-radius: 1rem;
-  border: none;
 }

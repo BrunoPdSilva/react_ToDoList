@@ -17,6 +17,8 @@ import "./home.css";
 export function Home() {
   const [showModal, setShowModal] = useState(false);
   const [newTodo, setNewTodo] = useState("");
+  const [date, setDate] = useState("");
+  const [description, setDescription] = useState("");
 
   const { user } = useAuthContext();
   const { documents } = useCollection("todo_list", ["userId", "==", user.uid]);
@@ -26,36 +28,63 @@ export function Home() {
 
     const toAdd = {
       task: newTodo,
-      time: new Date().toLocaleTimeString("pt-BR", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }),
       id: Math.random(),
       userId: user.uid,
+      date,
+      description,
     };
 
     await addDoc(collection(dataBase, "todo_list"), toAdd);
 
     setNewTodo("");
+    setDate("");
+    setDescription("");
   };
-
+  console.log(date);
   const handleCloseModal = () => setShowModal(false);
   if (showModal) setTimeout(handleCloseModal, 3000);
 
   return (
-    <section>
+    <main>
       <h1>React ToDo List =&#41;</h1>
       <div className="toDos">
         <Card toDos={documents} />
+      </div>
+      <div className="form-container">
         <form className="addTodo" onSubmit={e => handleAddTodo(e)}>
-          <input
-            type="text"
-            onChange={e => setNewTodo(e.target.value)}
-            value={newTodo}
-            autoComplete="off"
-            placeholder="Insira uma tarefa..."
-          />
+          <div>
+            <label>
+              <span>Tarefa:</span>
+              <input
+                className="task-input"
+                type="text"
+                onChange={e => setNewTodo(e.target.value)}
+                value={newTodo}
+                autoComplete="off"
+                placeholder="Insira uma tarefa..."
+              />
+            </label>
+            <label>
+              <input
+                className="date-input"
+                type="date"
+                onChange={e => setDate(e.target.value)}
+                value={date}
+                required
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              <span>Descrição:</span>
+              <input
+                className="description-input"
+                type="text"
+                onChange={e => setDescription(e.target.value)}
+                value={description}
+              />
+            </label>
+          </div>
           <button type="submit">Adicionar</button>
         </form>
       </div>
@@ -65,6 +94,6 @@ export function Home() {
           <h2>Sua tarefa deve conter pelo menos 3 letras =&#41;</h2>
         </Modal>
       )}
-    </section>
+    </main>
   );
 }

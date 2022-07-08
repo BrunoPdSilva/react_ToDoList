@@ -1,9 +1,9 @@
-div.card {
+div.card-container {
   position: relative;
   margin: 0.7rem 1.6rem;
   padding-inline: 1rem;
-  height: 3rem;
-  width: 55%;
+  height: 17rem;
+  width: 25%;
 
   font-size: 1.2rem;
   font-weight: bold;
@@ -13,12 +13,28 @@ div.card {
   background-color: #735bf2;
 
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;  
 }
 
-div.card button {
-  padding-top: 0.2rem;
+div.card-container header {
+  padding-block: 0.8rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 2px solid #5643b7;
+}
+
+div.card-container .task-title  {
+  max-width: 12rem;
+}
+
+div.card-container small {
+  font-size: 0.8rem;
+}
+
+div.card-container button {
   border: none;
   background-color: #735bf2;
   cursor: pointer;
@@ -26,14 +42,12 @@ div.card button {
   transition: 0.3s ease-in-out
 }
 
-div.card button:hover {
+div.card-container button:hover {
   transform: scale(1.1);
   color: #fff;
 }
 
-div.card small {
-  position: absolute;
-  right: 10%;
-  font-size: 0.8rem;
+div.card-container .description {
+  margin-top: 1rem;
 }
 
