@@ -30,13 +30,3 @@ export function useSignup() {
 
   return { error, isPending, signup };
 }
-
-/*     createUserWithEmailAndPassword(auth, email, password)
-    .then(res => {
-      dispatch({ type: "LOGIN", payload: res.user });
-    })
-    .catch(err => {
-      setError(err.message);
-    });
-    await res.user.updateProfile({ displayName })
-*/

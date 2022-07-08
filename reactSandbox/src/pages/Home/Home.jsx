@@ -46,15 +46,15 @@ export function Home() {
 
   return (
     <main>
-      <h1>React ToDo List =&#41;</h1>
+      <h1>Lista de tarefas</h1>
       <div className="toDos">
         <Card toDos={documents} />
       </div>
       <div className="form-container">
         <form className="addTodo" onSubmit={e => handleAddTodo(e)}>
+          <span>Adicionar tarefa:</span>
           <div>
             <label>
-              <span>Tarefa:</span>
               <input
                 className="task-input"
                 type="text"
@@ -74,10 +74,10 @@ export function Home() {
               />
             </label>
           </div>
+          <span>Descrição:</span>
           <div>
             <label>
-              <span>Descrição:</span>
-              <input
+              <textarea
                 className="description-input"
                 type="text"
                 onChange={e => setDescription(e.target.value)}

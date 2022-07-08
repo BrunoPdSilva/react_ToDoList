@@ -17,7 +17,7 @@ export function Card({ toDos }) {
           <div className="card-container" key={id}>
             <header>
               <p className="task-title">{task}</p>
-              <small>Conclusão: {date}</small>
+              <small>{date}</small>
               <button onClick={() => handleClick(id)}>
                 <Trash size={22} />
               </button>

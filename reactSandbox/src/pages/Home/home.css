@@ -23,11 +23,13 @@ div.toDos {
 }
 
 form.addTodo {
+  margin-top: 1.5rem;
+  width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
 }
 
 form.addTodo input {
@@ -40,12 +42,25 @@ form.addTodo input {
 form.addTodo label {
   width: 100%;
 }
-form.addTodo task-input {
-  width: 400px;
+form.addTodo .task-input {
+  margin-right: 0.4rem;
+  margin-bottom: 0.4rem;
+  width: 22.6rem;
 }
 
-form.addTodo date-input {
-  width: 400px;
+form.addTodo span {
+  margin-right: 0.4rem;
+  font-size: 1.2rem;
+  color: #e5e5e5;
+}
+
+form.addTodo textarea {
+  width: 32rem;
+  height: 10rem;
+  padding: 0.4rem;
+  margin-block: 0.4rem;
+  border: none;
+  border-radius: 10px;
 }
 
 form.addTodo button {
@@ -63,7 +78,7 @@ form.addTodo button {
   transition: filter 0.2s ease-in-out;
 }
 
-form.addTodo button:hover{
+form.addTodo button:hover {
   cursor: pointer;
   filter: brightness(0.9);
 }

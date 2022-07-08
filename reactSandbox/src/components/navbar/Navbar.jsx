@@ -20,16 +20,16 @@ export function Navbar() {
         {!user && (
           <>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/login">Entrar</Link>
             </li>
             <li>
-              <Link to="/signup">Signup</Link>
+              <Link to="/signup">Cadastrar</Link>
             </li>
           </>
         )}
         {user && (
           <li>
-            <button onClick={logout}>Logout</button>
+            <button onClick={logout}>Sair</button>
           </li>
         )}
       </ul>
